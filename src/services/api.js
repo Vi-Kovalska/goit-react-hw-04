@@ -58,11 +58,10 @@ export const fetchImagesFromAPI = async (query, page) => {
       q: query,
       image_type: "photo",
       orientation: "horizontal",
-      safesearch: true,
+      safesearch: false,
       page,
       per_page: 10,
     },
   });
-  console.log(response);
   return response.data;
 };

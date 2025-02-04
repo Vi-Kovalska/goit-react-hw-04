@@ -4,9 +4,12 @@ import './index.css'
 import App from './components/App.jsx'
 import 'modern-normalize'
 import { Toaster } from 'react-hot-toast'
+import {ThemeProvider} from './components/Provider/ThemeProvider/ThemeProvider.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
     <Toaster/>
   </StrictMode>,
 )
