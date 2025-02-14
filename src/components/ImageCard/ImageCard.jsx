@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import s from './ImageCard.module.css'
 import ImageModal from '../ImageModal/ImageModal';
-// const ImageCard = ({data, openModal}) => {
-const ImageCard = ({ data: { id, previewURL }, data}) => {
-    // Modal region
+const ImageCard = ({ data: { created_at, id, urls : {small, regular}, alt_description} }) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
   const openModal =() => {
         setModalIsOpen(true);
@@ -19,11 +17,8 @@ const ImageCard = ({ data: { id, previewURL }, data}) => {
     
   return (
   <>
-    {/* {data.map(img => <div key={`${img.created_at}-${img.id}`}><img  id={img.id} src={img.urls.small} alt={img.description} onClick={()=> openModal()}/></div>) } */}
-      <li className={s.cardItem}><img id={id} width={200} height={200} src={previewURL} alt={'Hi'} onClick={() => {
-        openModal();
-      }} /></li>
-      {modalIsOpen && <ImageModal modalIsOpen={modalIsOpen} closeModal={closeModal} handleBackdrop={handleBackdrop} data={data}/>}
+     <div key={`${created_at}-${id}`}><img  id={id} src={small} alt={alt_description} width={300} height={200} onClick={()=> openModal()}/></div>
+      {modalIsOpen && <ImageModal modalIsOpen={modalIsOpen} closeModal={closeModal} handleBackdrop={handleBackdrop} regular={regular} id={id} alt_description={alt_description} />}
   
     </>
       )

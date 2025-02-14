@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from 'react-modal';
 import s from './ImageModal.module.css'
 
-export const ImageModal = ({ data: { largeImageURL, description }, modalIsOpen, closeModal, handleBackdrop }) => {
+export const ImageModal = ({id,  regular , alt_description , modalIsOpen, closeModal, handleBackdrop }) => {
     Modal.setAppElement('#root');
     const customStyles = {
         content: {
@@ -19,13 +19,10 @@ export const ImageModal = ({ data: { largeImageURL, description }, modalIsOpen, 
     return (
         <div onClick={(e) => handleBackdrop(e)} className={s.backdrop}>
             <Modal className={s.modal} isOpen={modalIsOpen}
-                // onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
                 style={customStyles}
             contentLabel="Gallery's card">
-                {/* // contentLabel={data.map(img => img.description)}> */}
-                {/* {data.map(img => <img key={crypto.randomUUID()} src={img.urls.regular} alt={img.description} />)} */}
-               <img key={crypto.randomUUID()} src={largeImageURL} alt={description} />
+                <img key={`${id}${crypto.randomUUID()}`} src={regular} alt={alt_description} />
             </Modal>
         </div>
     )

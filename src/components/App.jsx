@@ -19,6 +19,7 @@ function App() {
   const [collection, setCollection] = useState([]);
   const [newQuery, setNewQuery] = useState('');
   const [page, setPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(1);
   const [isLoad, setIsLoad] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorMess, setErrorMess] = useState('');
@@ -28,12 +29,13 @@ function App() {
       try {
         setIsError(false);
         setIsLoad(true);
-        const { hits } = await fetchImagesFromAPI(newQuery, page);
-        if (hits.length === 0) {
+        const { results, total_pages} = await fetchImagesFromAPI(newQuery, page);
+        if (results.length === 0) {
           toast.error('There are no images for your request. Please try again!');
           
         }
-         setCollection(prev => [...prev, ...hits])
+        setCollection(prev => [...prev, ...results]);
+        setMaxPage(total_pages);
 }catch (error) {
         setIsError(true);
         setErrorMess(error.message)
@@ -53,9 +55,9 @@ function App() {
     setPage(1);
   }
   const changePage = () =>  {
-// if (page >= maxPage) {
-//            return toast.error('Out of articles!');
-//           }
+if (page >= maxPage) {
+           return toast.error('Out of articles!');
+          }
         return setPage(prev => prev + 1)
   }
 
