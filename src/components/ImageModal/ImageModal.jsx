@@ -6,6 +6,7 @@ export const ImageModal = ({id,  regular , alt_description , modalIsOpen, closeM
     Modal.setAppElement('#root');
     const customStyles = {
         content: {
+            position: 'absolute',
             top: '50%',
             left: '50%',
             right: 'auto',
@@ -13,12 +14,20 @@ export const ImageModal = ({id,  regular , alt_description , modalIsOpen, closeM
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
         },
+        overlay: {
+        position: 'fixed',
+        top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+        backgroundColor: 'rgba(18, 18, 20, 0.897)',
+        }
     };
 
 
     return (
-        <div onClick={(e) => handleBackdrop(e)} className={s.backdrop}>
-            <Modal className={s.modal} isOpen={modalIsOpen}
+        <div onClick={(e) => handleBackdrop(e)} >
+            <Modal isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 style={customStyles}
             contentLabel="Gallery's card">
