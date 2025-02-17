@@ -1,8 +1,8 @@
 import React from 'react'
 import s from './LoadMoreBTN.module.css'
-const LoadMoreBTN = ({changePage}) => {
+const LoadMoreBTN = ({changePage, disabled, children}) => {
   return (
-    <button className={s.btnLoadMore} onClick={changePage}>Load more</button>
+    <button className={s.btnLoadMore} onClick={changePage} disabled={disabled}>{children}</button>
   )
 }
 

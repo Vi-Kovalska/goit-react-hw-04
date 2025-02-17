@@ -26,7 +26,7 @@ function App() {
   const [errorMess, setErrorMess] = useState('');
   useEffect(() => {
   if (!newQuery) return;
-    const getData = async () => {
+    const asyncWrapper = async () => {
       try {
         setIsError(false);
         setIsLoad(true);
@@ -46,7 +46,7 @@ function App() {
   }
 
     }
-    getData();
+    asyncWrapper();
     }
     , [newQuery, page])
  
@@ -61,7 +61,7 @@ function App() {
     setCollection([]);
     setPage(1);
   }
-  
+
   let perPage = 10;
   const totalPages = Math.ceil(totalElements / perPage);
   const changePage = () =>  {
@@ -96,7 +96,7 @@ if (page >= totalPages) {
         {modalIsOpen && <ImageModal modalIsOpen={modalIsOpen} closeModal={closeModal} handleBackdrop={handleBackdrop} image={dataForModalImg} openModal={openModal}  />}
      {isLoad && <Loader />}
       {isError && <ErrorMessage errorMess={errorMess} />}
-        {collection.length > 0 && <LoadMoreBTN changePage={changePage} />}
+        {collection.length > 0 && <LoadMoreBTN changePage={changePage} disabled={isLoad}>Load more</LoadMoreBTN>}
       </div>
     </>
   )
